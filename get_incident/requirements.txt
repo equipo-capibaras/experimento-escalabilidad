@@ -1,0 +1,4 @@
+flask==3.0.3
+firebase-admin==6.5.0
+google-cloud-secret-manager==2.20.2
+python-dotenv==1.0.1
