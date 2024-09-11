@@ -1,14 +1,40 @@
 from flask import Flask, request, jsonify
-from google.cloud import firestore
+from google.cloud import secretmanager
+import os
+import firebase_admin
+from firebase_admin import credentials, firestore
+from dotenv import load_dotenv
+
+# Cargar variables de entorno
+load_dotenv()
 
 # Initialize Flask app
 app = Flask(__name__)
 
-# Conectar con Firestore
-db = firestore.Client()
+
+# Credenciales de Firebase
+def access_secret_version(secret_id, version_id="latest"):
+    client = secretmanager.SecretManagerServiceClient()
+
+    project_id = os.getenv("GOOGLE_CLOUD_PROJECT")
+    name = f"projects/{project_id}/secrets/{secret_id}/versions/{version_id}"
+
+    response = client.access_secret_version(name=name)
+    secret_payload = response.payload.data.decode("UTF-8")
+
+    return secret_payload
+
+
+# Obtener las credenciales desde Google Secret Manager
+service_account_info = access_secret_version("FIREBASE_SERVICE_ACCOUNT")
 
 # Colección de incidentes en Firestore
-INCIDENT_COLLECTION = 'incidentes'
+INCIDENT_COLLECTION = access_secret_version("FIRESTORE_COLLECTION_NAME")
+
+# Conectar con Firestore
+cred = credentials.Certificate("serviceAccountKey.json")
+firebase_admin.initialize_app(cred)
+db = firestore.Client()
 
 
 # Ruta para crear un incidente
