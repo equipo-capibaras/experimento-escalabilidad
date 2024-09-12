@@ -1,0 +1,41 @@
+info:
+  title: ABCall API Gateway
+  version: 1.0.0
+paths:
+  /v1/incidents:
+    get:
+      summary: "Get Incidents"
+      operationId: "getIncidents"
+      responses:
+        '200':
+          description: "Successful response"
+      x-google-backend:
+        address: "${get_incidents_url}"
+        path_translation: "APPEND_PATH_TO_ADDRESS"
+    post:
+      summary: "Create Incidents"
+      operationId: "createIncidents"
+      responses:
+        '200':
+          description: "Successful response"
+      x-google-backend:
+        address: "${modify_incidentes_url}"
+        path_translation: "APPEND_PATH_TO_ADDRESS"
+
+  /v1/incidents/{id}:
+    put:
+      summary: "Update Incident by ID"
+      operationId: "updateIncidentById"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: "ID of the incident to update"
+          type: string
+      responses:
+        '200':
+          description: "Successful response"
+      x-google-backend:
+        address: "${modify_incidentes_url}"
+        path_translation: "APPEND_PATH_TO_ADDRESS"
+swagger: '2.0'

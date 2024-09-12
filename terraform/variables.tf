@@ -1,21 +1,47 @@
-variable "project_id" {
-  description = "Google Cloud Project ID"
-  type        = string
-}
-
-variable "region" {
-  description = "Google Cloud region for deployment"
+variable "gcp_region" {
   type        = string
   default     = "us-central1"
+  description = "GCP region"
 }
 
-variable "docker_image_url" {
-  description = "URL of the Docker image to deploy in Cloud Run"
+variable "gcp_project_id" {
   type        = string
+  description = "GCP project ID"
 }
 
-variable "firestore_collection_name" {
-  description = "Firestore collection name to create if it doesn't exist"
+variable "registry_id" {
   type        = string
-  default     = "incidents"
+  default     = "exp-scalability-repo"
+  description = "Artifact registry ID"
+}
+
+variable "get_incidents_service_name" {
+  type        = string
+  default     = "get-incidents"
+  description = "Microservice name"
+}
+
+variable "modify_incidents_service_name" {
+  type        = string
+  default     = "modify-incidents"
+  description = "Microservice name"
+}
+
+
+variable "database_name" {
+  type        = string
+  default     = "incidentsdb"
+  description = "Firestore database name"
+}
+
+variable "api_id" {
+  type        = string
+  default     = "exp-scalability"
+  description = "API Gateway API ID"
+}
+
+variable "service_account_name" {
+  type        = string
+  default     = "exp-scalability-sa"
+  description = "Service account name"
 }
