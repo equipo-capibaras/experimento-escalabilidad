@@ -9,14 +9,11 @@ API_PREFIX = "/v1/incidents"
 def create_app():
     app = Flask(__name__)
 
-    try:
-        collection_name = "incidents"
-    except Exception as e:
-        print(f"Error al obtener el nombre de la colección: {e}", flush=True)
-        raise
+    collection_name = "incidents"
+    database_name = "incidentsdb"
 
     try:
-        db = firestore.Client()
+        db = firestore.Client(database=database_name)
     except Exception as e:
         print(f"Error al inicializar Firestore: {e}", flush=True)
         raise

@@ -24,6 +24,7 @@ resource "google_cloud_run_v2_service" "get_incidents" {
   template {
     execution_environment = "EXECUTION_ENVIRONMENT_GEN2"
     service_account = google_service_account.default.email
+    container_concurrency = 20
 
     containers {
       name = "app"
@@ -57,10 +58,11 @@ resource "google_cloud_run_v2_service" "get_incidents" {
         startup_cpu_boost = true
       }
     }
+  }
 
-    scaling {
-      min_instance_count = 1
-      max_instance_count = 10
+  metadata {
+    annotations = {
+      "run.googleapis.com/minScale": "1"
     }
   }
 
@@ -85,6 +87,7 @@ resource "google_cloud_run_v2_service" "modify_incidents" {
   template {
     execution_environment = "EXECUTION_ENVIRONMENT_GEN2"
     service_account = google_service_account.default.email
+    container_concurrency = 20
 
     containers {
       name = "app"
@@ -117,10 +120,11 @@ resource "google_cloud_run_v2_service" "modify_incidents" {
         startup_cpu_boost = true
       }
     }
+  }
 
-    scaling {
-      min_instance_count = 1
-      max_instance_count = 10
+  metadata {
+    annotations = {
+      "run.googleapis.com/minScale": "1"
     }
   }
 
