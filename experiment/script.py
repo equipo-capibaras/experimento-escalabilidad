@@ -16,8 +16,7 @@ fake = Faker()
 with open(output_file, mode="w", newline="") as file:
     writer = csv.writer(file)
 
-    # Ejecuta 90 peticiones
-    for i in range(90):
+    for i in range(100):
         try:
             # Genera una descripción aleatoria utilizando Faker
             descripcion = fake.sentence()  # Genera una oración aleatoria
