@@ -1,39 +1,44 @@
 import requests
 from faker import Faker
 import csv
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 
-# Define la URL de tu endpoint de creación de documentos
-url = "https://exp-scalability-gw-1vp12yav.uc.gateway.dev/v1/incidents"
+url = os.getenv('URL')
 
-# Archivo donde se guardarán los IDs
 output_file = "ids.csv"
 
-# Crea una instancia de Faker
 fake = Faker()
 
-# Abre el archivo en modo escritura y prepara para escribir en formato CSV
+token = os.getenv('TOKEN')
+
 with open(output_file, mode="w", newline="") as file:
     writer = csv.writer(file)
 
     for i in range(100):
         try:
-            # Genera una descripción aleatoria utilizando Faker
-            descripcion = fake.sentence()  # Genera una oración aleatoria
+            name = fake.name()
+            descripcion = fake.sentence()
 
-            # Datos de ejemplo para la creación de un documento con descripción aleatoria
-            data = {"mensaje": descripcion}
+            data = {
+                "name": name,
+                "description": descripcion,
+                "email": "juan.rodriguez@example.com",
+            }
 
-            # Realiza la petición POST
-            response = requests.post(url, json=data)
+            headers = {
+                "Authorization": f"Bearer {token}",
+                "Content-Type": "application/json",
+            }
 
-            # Verifica que la petición fue exitosa
+            response = requests.post(url, json=data, headers=headers)
+
             if response.status_code == 201:
-                # Extrae el ID del documento del JSON de respuesta
                 document_id = response.json().get("id")
                 print(f"Documento creado con ID: {document_id}")
 
-                # Guarda el ID y la descripción en el archivo CSV
                 writer.writerow([document_id])
             else:
                 print(f"Error en la creación: {response.status_code} - {response.text}")

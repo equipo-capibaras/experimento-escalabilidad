@@ -11,7 +11,7 @@
       <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Incidents ids">
         <stringProp name="delimiter">,</stringProp>
         <stringProp name="fileEncoding"></stringProp>
-        <stringProp name="filename">D:/Documentos/Laura/Proyecto final/experimento-escalabilidad/ids.csv</stringProp>
+        <stringProp name="filename">E:/Documentos/Laura/Proyecto final/experimento-escalabilidad/experiment/ids.csv</stringProp>
         <boolProp name="ignoreFirstLine">false</boolProp>
         <boolProp name="quotedData">false</boolProp>
         <boolProp name="recycle">true</boolProp>
@@ -20,25 +20,59 @@
         <stringProp name="variableNames">incident_id</stringProp>
       </CSVDataSet>
       <hashTree/>
-      <kg.apc.jmeter.threads.SteppingThreadGroup guiclass="kg.apc.jmeter.threads.SteppingThreadGroupGui" testclass="kg.apc.jmeter.threads.SteppingThreadGroup" testname="Consulta incidentes - Stepping">
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="token" elementType="Argument">
+            <stringProp name="Argument.name">token</stringProp>
+            <stringProp name="Argument.value">eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2Rldi5jYXBpYmFyYXMuaW8iLCJzdWIiOiIwYWJhZDAwNi05MjFjLTRlMDktYjJhNi0xMDcxM2I3MTU3MWYiLCJjaWQiOiI5YTY1MjgxOC0zNDJlLTQ3NzEtODRjZi0zOWMyMGEyOTI2NGQiLCJlbWFpbCI6Imp1bGlhbi5jb3Jkb2JhLnJpbmNvbkBnaWdhdGVsLmNvIiwicm9sZSI6ImFnZW50IiwiYXVkIjoiYWdlbnQiLCJpYXQiOjE3MzA1MDUxOTgsImV4cCI6MTc1NzU4MzY3OH0.Yno_o74jjG45vDlBQcAIuDKnRkzSM_8_I1TIgyN_asssGb05v-D2uuIzr2mBcRSCKKqO1XXYHDgMcAzC9AR3Cw</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </Arguments>
+      <hashTree/>
+      <com.blazemeter.jmeter.threads.concurrency.ConcurrencyThreadGroup guiclass="com.blazemeter.jmeter.threads.concurrency.ConcurrencyThreadGroupGui" testclass="com.blazemeter.jmeter.threads.concurrency.ConcurrencyThreadGroup" testname="Consulta incidentes">
+        <elementProp name="ThreadGroup.main_controller" elementType="com.blazemeter.jmeter.control.VirtualUserController"/>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
-        <stringProp name="ThreadGroup.num_threads">1000</stringProp>
-        <stringProp name="Threads initial delay">0</stringProp>
-        <stringProp name="Start users count">100</stringProp>
-        <stringProp name="Start users count burst">0</stringProp>
-        <stringProp name="Start users period">30</stringProp>
-        <stringProp name="Stop users count">100</stringProp>
-        <stringProp name="Stop users period">30</stringProp>
-        <stringProp name="flighttime">1260</stringProp>
-        <stringProp name="rampUp">0</stringProp>
-        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <intProp name="LoopController.loops">-1</intProp>
-          <boolProp name="LoopController.continue_forever">false</boolProp>
-        </elementProp>
-      </kg.apc.jmeter.threads.SteppingThreadGroup>
+        <stringProp name="TargetLevel">18</stringProp>
+        <stringProp name="RampUp">10</stringProp>
+        <stringProp name="Steps"></stringProp>
+        <stringProp name="Hold">50</stringProp>
+        <stringProp name="LogFilename"></stringProp>
+        <stringProp name="Iterations"></stringProp>
+        <stringProp name="Unit">M</stringProp>
+      </com.blazemeter.jmeter.threads.concurrency.ConcurrencyThreadGroup>
       <hashTree>
+        <kg.apc.jmeter.timers.VariableThroughputTimer guiclass="kg.apc.jmeter.timers.VariableThroughputTimerGui" testclass="kg.apc.jmeter.timers.VariableThroughputTimer" testname="jp@gc - Throughput Shaping Timer">
+          <collectionProp name="load_profile">
+            <collectionProp name="1457868665">
+              <stringProp name="1505694">1.67</stringProp>
+              <stringProp name="1714134">8.33</stringProp>
+              <stringProp name="1815">90</stringProp>
+            </collectionProp>
+            <collectionProp name="1994222024">
+              <stringProp name="1714134">8.33</stringProp>
+              <stringProp name="1575">18</stringProp>
+              <stringProp name="1815">90</stringProp>
+            </collectionProp>
+            <collectionProp name="1570128948">
+              <stringProp name="1575">18</stringProp>
+              <stringProp name="1575">18</stringProp>
+              <stringProp name="51570">420</stringProp>
+            </collectionProp>
+          </collectionProp>
+        </kg.apc.jmeter.timers.VariableThroughputTimer>
+        <hashTree/>
+        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
+          <collectionProp name="HeaderManager.headers">
+            <elementProp name="" elementType="Header">
+              <stringProp name="Header.name">Authorization</stringProp>
+              <stringProp name="Header.value">Bearer ${token}</stringProp>
+            </elementProp>
+          </collectionProp>
+        </HeaderManager>
+        <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Consulta incidentes">
-          <stringProp name="HTTPSampler.path">https://exp-scalability-gw-1vp12yav.uc.gateway.dev/v1/incidents/${incident_id}</stringProp>
+          <stringProp name="HTTPSampler.path">https://dev.capibaras.io/api/v1/incidents/${incident_id}</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -83,7 +117,7 @@
                 <connectTime>true</connectTime>
               </value>
             </objProp>
-            <stringProp name="filename">D:\Documentos\Laura\Proyecto final\resultados_consulta_1.csv</stringProp>
+            <stringProp name="filename">D:\Documentos\Laura\Proyecto final\resultados_consulta.csv</stringProp>
           </ResultCollector>
           <hashTree/>
           <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph">
@@ -120,36 +154,10 @@
                 <connectTime>true</connectTime>
               </value>
             </objProp>
-            <stringProp name="filename">D:\Documentos\Laura\Proyecto final\resultados_consulta_1.csv</stringProp>
+            <stringProp name="filename">D:\Documentos\Laura\Proyecto final\resultados_consulta.csv</stringProp>
           </ResultCollector>
           <hashTree/>
-        </hashTree>
-      </hashTree>
-      <com.blazemeter.jmeter.threads.concurrency.ConcurrencyThreadGroup guiclass="com.blazemeter.jmeter.threads.concurrency.ConcurrencyThreadGroupGui" testclass="com.blazemeter.jmeter.threads.concurrency.ConcurrencyThreadGroup" testname="Consulta incidentes" enabled="false">
-        <elementProp name="ThreadGroup.main_controller" elementType="com.blazemeter.jmeter.control.VirtualUserController"/>
-        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
-        <stringProp name="TargetLevel">1000</stringProp>
-        <stringProp name="RampUp">5</stringProp>
-        <stringProp name="Steps"></stringProp>
-        <stringProp name="Hold">5</stringProp>
-        <stringProp name="LogFilename"></stringProp>
-        <stringProp name="Iterations"></stringProp>
-        <stringProp name="Unit">M</stringProp>
-      </com.blazemeter.jmeter.threads.concurrency.ConcurrencyThreadGroup>
-      <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Consulta incidentes" enabled="true">
-          <stringProp name="HTTPSampler.path">https://exp-scalability-gw-1vp12yav.uc.gateway.dev/v1/incidents/${incident_id}</stringProp>
-          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-          <stringProp name="HTTPSampler.method">GET</stringProp>
-          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-          <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">true</boolProp>
-          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
-            <collectionProp name="Arguments.arguments"/>
-          </elementProp>
-        </HTTPSamplerProxy>
-        <hashTree>
-          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report">
             <boolProp name="ResultCollector.error_logging">false</boolProp>
             <objProp>
               <name>saveConfig</name>
@@ -183,10 +191,10 @@
                 <connectTime>true</connectTime>
               </value>
             </objProp>
-            <stringProp name="filename">D:\Documentos\Laura\Proyecto final\resultados_consulta.csv</stringProp>
+            <stringProp name="filename"></stringProp>
           </ResultCollector>
           <hashTree/>
-          <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph" enabled="true">
+          <ResultCollector guiclass="StatGraphVisualizer" testclass="ResultCollector" testname="Aggregate Graph">
             <boolProp name="ResultCollector.error_logging">false</boolProp>
             <objProp>
               <name>saveConfig</name>
@@ -220,7 +228,7 @@
                 <connectTime>true</connectTime>
               </value>
             </objProp>
-            <stringProp name="filename">D:\Documentos\Laura\Proyecto final\resultados_consulta.csv</stringProp>
+            <stringProp name="filename"></stringProp>
           </ResultCollector>
           <hashTree/>
         </hashTree>
@@ -228,28 +236,41 @@
       <com.blazemeter.jmeter.threads.concurrency.ConcurrencyThreadGroup guiclass="com.blazemeter.jmeter.threads.concurrency.ConcurrencyThreadGroupGui" testclass="com.blazemeter.jmeter.threads.concurrency.ConcurrencyThreadGroup" testname="Actualizar incidencias">
         <elementProp name="ThreadGroup.main_controller" elementType="com.blazemeter.jmeter.control.VirtualUserController"/>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
-        <stringProp name="TargetLevel">500</stringProp>
+        <stringProp name="TargetLevel">9</stringProp>
         <stringProp name="RampUp">0</stringProp>
         <stringProp name="Steps">0</stringProp>
-        <stringProp name="Hold">30</stringProp>
+        <stringProp name="Hold">10</stringProp>
         <stringProp name="LogFilename"></stringProp>
         <stringProp name="Iterations"></stringProp>
         <stringProp name="Unit">M</stringProp>
       </com.blazemeter.jmeter.threads.concurrency.ConcurrencyThreadGroup>
       <hashTree>
-        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+        <ConstantThroughputTimer guiclass="TestBeanGUI" testclass="ConstantThroughputTimer" testname="Constant Throughput Timer">
+          <intProp name="calcMode">2</intProp>
+          <doubleProp>
+            <name>throughput</name>
+            <value>500.0</value>
+            <savedValue>0.0</savedValue>
+          </doubleProp>
+        </ConstantThroughputTimer>
+        <hashTree/>
+        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
           <collectionProp name="HeaderManager.headers">
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">Content-Type</stringProp>
               <stringProp name="Header.value">application/json</stringProp>
             </elementProp>
+            <elementProp name="" elementType="Header">
+              <stringProp name="Header.name">Authorization</stringProp>
+              <stringProp name="Header.value">Bearer ${token}</stringProp>
+            </elementProp>
           </collectionProp>
         </HeaderManager>
         <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Actualizar incidencia">
-          <stringProp name="HTTPSampler.path">https://exp-scalability-gw-1vp12yav.uc.gateway.dev/v1/incidents/${incident_id}</stringProp>
+          <stringProp name="HTTPSampler.path">https://dev.capibaras.io/api/v1/incidents/web</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-          <stringProp name="HTTPSampler.method">PUT</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
           <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">true</boolProp>
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
@@ -258,7 +279,9 @@
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.value">{&#xd;
-  &quot;mensaje&quot;: &quot;nueva descripcion&quot;&#xd;
+    &quot;name&quot;: &quot;Nueva incidencia&quot;,&#xd;
+    &quot;description&quot;: &quot;Descripción&quot;,&#xd;
+    &quot;email&quot;: &quot;juan.rodriguez@example.com&quot;&#xd;
 }</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
@@ -300,10 +323,10 @@
                 <connectTime>true</connectTime>
               </value>
             </objProp>
-            <stringProp name="filename">D:\Documentos\Laura\Proyecto final\resultados_modificacion_1.csv</stringProp>
+            <stringProp name="filename">D:\Documentos\Laura\Proyecto final\resultados_modificacion_2.csv</stringProp>
           </ResultCollector>
           <hashTree/>
-          <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph">
+          <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph" enabled="true">
             <boolProp name="ResultCollector.error_logging">false</boolProp>
             <objProp>
               <name>saveConfig</name>
@@ -337,7 +360,82 @@
                 <connectTime>true</connectTime>
               </value>
             </objProp>
-            <stringProp name="filename">D:\Documentos\Laura\Proyecto final\resultados_modificacion_1.csv</stringProp>
+            <stringProp name="filename">D:\Documentos\Laura\Proyecto final\resultados_modificacion.csv</stringProp>
+            <intProp name="RespTimeGraph.graphtitlefontstyle">0</intProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <url>true</url>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="StatGraphVisualizer" testclass="ResultCollector" testname="Aggregate Graph" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <url>true</url>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
           </ResultCollector>
           <hashTree/>
         </hashTree>
